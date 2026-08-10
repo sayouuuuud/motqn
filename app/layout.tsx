@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Cairo, Amiri } from 'next/font/google'
+import { Cairo, Amiri, Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { AnalyticsTracker } from '@/components/analytics-tracker'
 import { LanguageProvider } from '@/lib/i18n/context'
@@ -13,6 +13,16 @@ const cairo = Cairo({
   subsets: ['arabic', 'latin'],
   weight: ['300', '400', '500', '600', '700', '800'],
   variable: '--font-cairo',
+})
+
+const geist = Geist({
+  subsets: ['latin'],
+  variable: '--font-geist',
+})
+
+const geistMono = Geist_Mono({
+  subsets: ['latin'],
+  variable: '--font-geist-mono',
 })
 
 const amiri = Amiri({
@@ -63,7 +73,7 @@ export default async function RootLayout({
     <html
       lang={locale}
       dir={locale === "ar" ? "rtl" : "ltr"}
-      className={`${cairo.variable} ${amiri.variable} bg-background`}
+      className={`${cairo.variable} ${amiri.variable} ${geist.variable} ${geistMono.variable} bg-background`}
       suppressHydrationWarning
     >
       <body className="font-sans antialiased overflow-x-hidden" suppressHydrationWarning>

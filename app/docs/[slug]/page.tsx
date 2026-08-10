@@ -1,25 +1,27 @@
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import { DocsExplorer } from '@/components/docs/docs-explorer'
-import { docsGuides, getGuide } from '@/lib/docs/content'
+import { platformDocs } from '@/lib/docs/platform-docs-data'
 
 export function generateStaticParams() {
-  return docsGuides.map((guide) => ({ slug: guide.slug }))
+  return platformDocs.map((doc) => ({ slug: doc.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const guide = getGuide(slug)
-  if (!guide) return {}
+  const doc = platformDocs.find((d) => d.slug === slug)
+  if (!doc) return {}
   return {
-    title: `${guide.title.ar} | مركز مساعدة مُتْقِن`,
-    description: guide.description.ar,
+    title: `${doc.title.ar} | توثيق منصة مُتْقِن`,
+    description: doc.description.ar,
   }
 }
 
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  if (!getGuide(slug)) notFound()
+  const doc = platformDocs.find((d) => d.slug === slug)
+  if (!doc) notFound()
+
   return (
     <Suspense fallback={<main className="min-h-screen bg-background" />}>
       <DocsExplorer slug={slug} />

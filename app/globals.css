@@ -198,7 +198,7 @@
 
 @theme inline {
   --font-sans: var(--font-cairo), sans-serif;
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --font-mono: var(--font-geist-mono), 'Geist Mono', 'Geist Mono Fallback';
   --font-quran: var(--font-amiri), 'Amiri', serif;
   --font-heading: 'Thmanyah', 'Cairo', serif;
   --color-background: var(--background);
